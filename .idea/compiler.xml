@@ -11,10 +11,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="LibraryManagement" />
-        <module name="parkinglot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="parkinglot" target="21" />
       <module name="ParkingLot" target="21" />
     </bytecodeTargetLevel>
   </component>

@@ -1,0 +1,34 @@
+=== MULTI-TENANT LIBRARY MANAGEMENT SYSTEM LLD ===
+
+1. CORE ENTITIES
+----------------
+- Book (id, title, author)
+- BookEdition (isbn, format [HARDCOVER, PAPERBACK], publisher, cost)
+- BookItem (id, barcode, tenantId, isbn, format, status [AVAILABLE, BORROWED, LOST, RESERVED], dueDate)
+- User (id, tenantId, role [MEMBER, LIBRARIAN], name, email)
+- Member extends User (membershipId, status [ACTIVE, BLOCKED, EXPIRED, SUSPENDED], currentBorrowedCount, totalFinesOwed)
+- Tenant (id, name, config)
+- TenantConfig (maxBooksAllowed, defaultLoanPeriodDays, fineStrategyType, flatFinePerDay, reservationHoldHours)
+
+2. DESIGN PATTERNS
+------------------
+- Strategy Pattern: FineStrategy interface with FlatDaily, Tiered, and FormatBased implementations.
+- Factory Pattern: FineStrategyFactory to instantiate strategies based on TenantConfig.
+
+3. CORE API CONTRACTS
+---------------------
+- Tenant Admin:
+    * createTenant(TenantConfig) -> Tenant
+- Inventory Management:
+    * addBook(tenantId, Book, BookEdition)
+    * addBookItem(tenantId, barcode, isbn, format) -> BookItem
+- Member Operations:
+    * borrowBook(tenantId, memberId, barcode) -> BorrowResult
+    * returnBook(tenantId, memberId, barcode, returnDate) -> ReturnResult (fines calculated)
+    * reserveBook(tenantId, memberId, isbn) -> ReservationResult
+    * reportLostBook(tenantId, memberId, barcode, lossDate) -> FineResult
+
+4. CONCURRENCY & MULTI-TENANCY ISOLATION
+----------------------------------------
+- Isolation: All database/in-memory lookups scoped strictly by tenantId.
+- Thread Safety: ConcurrentHashMap for repositories + explicit locks (ReentrantLock) per BookItem to handle simultaneous checkout/reservation requests.
