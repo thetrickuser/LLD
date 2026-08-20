@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 public class Floor {
 
     private final UUID id;
-    @Getter
     private final int floorNumber;
-    @Getter
     private List<ParkingSlot> parkingSlots;
 
     public Floor(int floorNumber) {
