@@ -1,10 +1,12 @@
 package com.tuf.librarymanagement.domain.book;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.UUID;
 
-@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookEdition {
     private String isbn;
     private UUID bookId;

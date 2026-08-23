@@ -1,10 +1,14 @@
 package com.tuf.librarymanagement.domain.member;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     private UUID id;
     private String tenantId;

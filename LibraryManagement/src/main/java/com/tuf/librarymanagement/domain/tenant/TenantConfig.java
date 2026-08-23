@@ -1,9 +1,11 @@
 package com.tuf.librarymanagement.domain.tenant;
 
 import com.tuf.librarymanagement.domain.tenant.fine.FineStrategyType;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class TenantConfig {
     private int maxBooksAllowed;
     private int defaultLoanPeriodDays;

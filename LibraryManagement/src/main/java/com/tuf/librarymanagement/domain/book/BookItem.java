@@ -1,11 +1,13 @@
 package com.tuf.librarymanagement.domain.book;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookItem {
     private UUID id;
     private String barcode;
